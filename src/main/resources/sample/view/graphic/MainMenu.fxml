@@ -13,7 +13,7 @@
       </Button>
       <Button layoutX="750.0" layoutY="242.0" mnemonicParsing="false" onAction="#Scoreboard" prefHeight="42.0" prefWidth="267.0" text="Scoreboard" />
       <Button layoutX="750.0" layoutY="302.0" mnemonicParsing="false" onAction="#ProfileClicked" prefHeight="42.0" prefWidth="267.0" text="Profile" />
-      <Button layoutX="750.0" layoutY="354.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="267.0" text="Deck" />
+      <Button layoutX="750.0" layoutY="354.0" mnemonicParsing="false" onAction="#DeckClicked" prefHeight="42.0" prefWidth="267.0" text="Deck" />
       <Button layoutX="750.0" layoutY="462.0" mnemonicParsing="false" onAction="#LogoutClicked" prefHeight="42.0" prefWidth="267.0" text="Log out" />
       <Button layoutX="750.0" layoutY="521.0" mnemonicParsing="false" onAction="#ExitClicked" prefHeight="42.0" prefWidth="267.0" text="Exit" />
       <Button layoutX="750.0" layoutY="408.0" mnemonicParsing="false" onAction="#Shop" prefHeight="42.0" prefWidth="267.0" text="Shop" />

@@ -437,18 +437,18 @@ public class ProgramController {
 
 
     public static void deck(User user) {
-        System.out.println("smaple.model.Deck Menu");
-        System.out.println("0.enter main menu");
-        System.out.println("1.show a card");
-        System.out.println("2.creat a new deck");
-        System.out.println("3.delete a deck");
-        System.out.println("4.set a deck active");
-        System.out.println("5.add a card to a deck");
-        System.out.println("6.add a card to a sidedeck");
-        System.out.println("7.show all decks");
-        System.out.println("8.show a deck");
-        System.out.println("9.show a side deck");
-        System.out.println("10.show all card names");
+        System.out.println("Deck Menu");
+        System.out.println("0. enter main menu");
+        System.out.println("1. show a card");
+        System.out.println("2. creat a new deck");
+        System.out.println("3. delete a deck");
+        System.out.println("4. set a deck active");
+        System.out.println("5. add a card to a deck");
+        System.out.println("6. add a card to a sidedeck");
+        System.out.println("7. show all decks");
+        System.out.println("8. show a deck");
+        System.out.println("9. show a side deck");
+        System.out.println("10. show all card names");
         String input = scanner.nextLine();
         while (!input.equals("menu exit") && !input.equals("0")) {
             boolean checker = false;
@@ -476,15 +476,16 @@ public class ProgramController {
 
             if (input.equals("2")) {
                 checker = true;
+                System.out.println("enter deck name:");
                 String name = scanner.nextLine();
-                creatDeck(name, user);
+                System.out.println(DeckCreat.creat(name, user));
             }
             pattern = Pattern.compile("deck create (^\\s+)");
             matcher = pattern.matcher(input);
             if (matcher.find()) {
                 checker = true;
                 String name = matcher.group(1);
-                creatDeck(name, user);
+                DeckCreat.creat(name, user);
             }
 
             if (input.equals("3")) {
@@ -751,22 +752,6 @@ public class ProgramController {
                 System.out.println("deck deleted successfully");
             } else {
                 System.out.println("deck with name " + name + " does not exist");
-            }
-        }
-    }
-
-    private static void creatDeck(String name, User user) {
-        boolean exist = false;
-        for (Deck deck : user.allDecks) {
-            if (deck.getName().equals(name)) {
-                System.out.println("deck with name +" + name + " already exists");
-                exist = true;
-                break;
-            }
-            if (!exist) {
-                Deck deck1 = new Deck(user, name);
-                user.allDecks.add(deck1);
-                System.out.println("deck created successfully!");
             }
         }
     }

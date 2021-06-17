@@ -25,7 +25,7 @@ public class MainMenu extends Application {
     }
 
     public void Scoreboard() throws Exception {
-    new ScoreboardMenu().start(stage);
+        new ScoreboardMenu().start(stage);
     }
 
     public void ProfileClicked() throws Exception {
@@ -33,10 +33,14 @@ public class MainMenu extends Application {
     }
 
     public void LogoutClicked() throws Exception {
-    new Start().start(stage);
+        new Start().start(stage);
     }
 
-    public void ExitClicked(){
+    public void DeckClicked() throws Exception {
+        new DeckMenu().start(stage);
+    }
+
+    public void ExitClicked() {
         System.exit(0);
     }
 }
