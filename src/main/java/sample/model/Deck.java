@@ -42,7 +42,7 @@ public class Deck {
     public Deck(User user, String name) {
         setName(name);
         setUser(user);
-
+        user.allDecks.add(this);
     }
 
     public void setName(String name) {

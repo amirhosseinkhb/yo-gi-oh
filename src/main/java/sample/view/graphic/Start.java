@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.controller.LoginController;
 import sample.controller.UserLogined;
+import sample.model.Deck;
 import sample.model.User;
 
 public class Start extends Application {
@@ -39,6 +40,9 @@ public class Start extends Application {
         String nextStep = LoginController.login(usernameVorodi.getText(), passwordVorodi.getText());
         if (nextStep.equals("OK")) {
             UserLogined.user= User.getUserByUsername(usernameVorodi.getText());
+            Deck deck = new Deck(User.getUserByUsername(usernameVorodi.getText()) , "fuck");
+            UserLogined.deck = deck;
+
             new MainMenu().start(stage);
         } else {
             error.setText(nextStep);

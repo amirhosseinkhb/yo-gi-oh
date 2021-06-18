@@ -15,8 +15,7 @@ public class DeckCreat {
         }
 
         if (!exist) {
-            Deck deck1 = new Deck(user, name);
-            user.allDecks.add(deck1);
+            new Deck(user, name);
             return "deck created successfully!";
         }else {
             return "deck with name +" + name + " already exists";

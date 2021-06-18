@@ -18,6 +18,8 @@ import sample.controller.UserLogined;
 import sample.model.Card.Card;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ShopMenu extends Application {
     private static Stage stage;
@@ -78,6 +80,7 @@ public class ShopMenu extends Application {
         ArrayList<String> allMonsters = SortCards.MonsterSort();
         ArrayList<String> allSpell = SortCards.SpellSort();
         ArrayList<String> allTrap = SortCards.TrapSort();
+        ArrayList<ShopCard> allCards = new ArrayList<>();
 
         int i = 0, j = 35, c = 560;
         for (String monsterCard : allMonsters) {
@@ -86,7 +89,7 @@ public class ShopMenu extends Application {
                 j += 100 + 460;
                 c += 100 + 460;
             }
-            new ShopCard(i, j, new Image(String.valueOf((getClass().getResource("Assets/Cards/Monsters/" + monsterCard.replace(" ", "").replace("-", "") + ".jpg")))));
+           allCards.add( new ShopCard(i, j,460,325, new Image(String.valueOf((getClass().getResource("Assets/Cards/Monsters/" + monsterCard.replace(" ", "").replace("-", "") + ".jpg"))))));
             Button button = new Button();
             button.setText("Buy");
             button.setId(monsterCard);
@@ -111,7 +114,7 @@ public class ShopMenu extends Application {
                 j += 100 + 460;
                 c += 100 + 460;
             }
-            new ShopCard(i, j, new Image(String.valueOf((getClass().getResource("Assets/Cards/SpellTrap/" + spellCard.replace(" ", "").replace("-", "").replace("'", "") + ".jpg")))));
+            allCards.add(new ShopCard(i, j,460,325, new Image(String.valueOf((getClass().getResource("Assets/Cards/SpellTrap/" + spellCard.replace(" ", "").replace("-", "").replace("'", "") + ".jpg"))))));
             Button button = new Button();
             button.setText("Buy");
             button.setOnAction(new EventHandler<ActionEvent>() {
@@ -133,7 +136,7 @@ public class ShopMenu extends Application {
                 c += 100 + 460;
             }
             if (trapCard.equals("Magic Jammer")) {
-                new ShopCard(i, j, new Image(String.valueOf((getClass().getResource("Assets/Cards/SpellTrap/" + trapCard.replace(" ", "").replace("-", "") + ".png")))));
+                allCards.add(new ShopCard(i, j,460,325, new Image(String.valueOf((getClass().getResource("Assets/Cards/SpellTrap/" + trapCard.replace(" ", "").replace("-", "") + ".png"))))));
                 Button button = new Button();
                 button.setText("Buy");
                 button.setOnAction(new EventHandler<ActionEvent>() {
@@ -146,7 +149,7 @@ public class ShopMenu extends Application {
                 button.setLayoutY(c);
                 innerAnchorPane.getChildren().add(button);
             } else {
-                new ShopCard(i, j, new Image(String.valueOf((getClass().getResource("Assets/Cards/SpellTrap/" + trapCard.replace(" ", "").replace("-", "").replace("'", "") + ".jpg")))));
+                allCards.add(new ShopCard(i, j,460,325, new Image(String.valueOf((getClass().getResource("Assets/Cards/SpellTrap/" + trapCard.replace(" ", "").replace("-", "").replace("'", "") + ".jpg"))))));
                 Button button = new Button();
                 button.setText("Buy");
                 button.setOnAction(new EventHandler<ActionEvent>() {
@@ -161,7 +164,7 @@ public class ShopMenu extends Application {
             }
             i += 385;
         }
-        return ShopCard.getAllCards();
+        return allCards;
     }
 
 

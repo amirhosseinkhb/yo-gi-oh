@@ -444,6 +444,7 @@ public class ProgramController {
         System.out.println("3. delete a deck");
         System.out.println("4. set a deck active");
         System.out.println("5. add a card to a deck");
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!7
         System.out.println("6. add a card to a sidedeck");
         System.out.println("7. show all decks");
         System.out.println("8. show a deck");
@@ -546,7 +547,7 @@ public class ProgramController {
                 checker = true;
                 System.out.println("enter card name:");
                 String cardName = scanner.nextLine();
-                System.out.println("enter (side)deck naem:");
+                System.out.println("enter (side)deck name:");
                 String deckName = scanner.nextLine();
                 CardAdderSidedeck(cardName, deckName, user);
             }
@@ -712,7 +713,7 @@ public class ProgramController {
             if (deck.getName().equals(name)) {
                 exist = true;
                 break;
-            }
+            }}
             if (exist) {
 
                 for (MonsterForUser monsterForUser : user.getDeckByName(name).allMonsterForUserMain) {
@@ -749,12 +750,13 @@ public class ProgramController {
                     user.setActiveDeck(null);
                     user.hasActiveDeck = false;
                 }
+
                 System.out.println("deck deleted successfully");
             } else {
                 System.out.println("deck with name " + name + " does not exist");
             }
         }
-    }
+
 
 
 
@@ -879,7 +881,6 @@ public class ProgramController {
 
     private static void CardAdder(String cardName, String deckName, User user) {
         boolean cardExist = false;
-        boolean deckExist = false;
 
         for (MonsterForUser monsterForUser : user.allMonsters) {
             if (monsterForUser.getName().equals(cardName)) {
@@ -893,8 +894,8 @@ public class ProgramController {
 
         for (SpellCardForUser spellCardForUser : user.allSpells) {
             if (spellCardForUser.getName().equals(cardName)) {
-
                 cardExist = true;
+                break;
             }
         }
         if (cardExist) {
@@ -917,7 +918,6 @@ public class ProgramController {
             System.out.println("card with name " + cardName + " does not exist");
             return;
         }
-
     }
 
     private static void MonsterAdder(String cardName, String deckName, User user) {
@@ -942,6 +942,12 @@ public class ProgramController {
                     check++;
                 }
             }
+            for (MonsterForUser monsterForUser1 : user.getDeckByName(deckName).allMonsterForUserSide) {
+                if (monsterForUser1.getName().equals(cardName)) {
+                    check++;
+                }
+            }
+
             if (check < 3) {
                 for (MonsterForUser monsterForUser1 : user.allMonsters) {
                     if (monsterForUser1.getName().equals(cardName) && !monsterForUser1.isInDeck) {
@@ -980,6 +986,11 @@ public class ProgramController {
         if (user.getDeckByName(deckName).numberOfCardsInMain < 60) {
 
             for (SpellCardForUser spellCardForUser : user.getDeckByName(deckName).allSpellCardsForUserMain) {
+                if (spellCardForUser.getName().equals(cardName)) {
+                    check++;
+                }
+            }
+            for (SpellCardForUser spellCardForUser : user.getDeckByName(deckName).allSpellCardsForUserSide) {
                 if (spellCardForUser.getName().equals(cardName)) {
                     check++;
                 }
@@ -1026,6 +1037,11 @@ public class ProgramController {
                     check++;
                 }
             }
+            for (TrapCardForUser trapCardForUser : user.getDeckByName(deckName).allTrapCardsForUserSide) {
+                if (trapCardForUser.getName().equals(cardName)) {
+                    check++;
+                }
+            }
             if (check < 3) {
                 for (TrapCardForUser trapCardForUser : user.allTraps) {
                     if (trapCardForUser.getName().equals(cardName) && !trapCardForUser.isInDeck) {
@@ -1047,11 +1063,11 @@ public class ProgramController {
 
     private static void CardAdderSidedeck(String cardName, String deckName, User user) {
         boolean cardExist = false;
-        boolean deckExist = false;
 
         for (MonsterForUser monsterForUser : user.allMonsters) {
             if (monsterForUser.getName().equals(cardName)) {
                 cardExist = true;
+                break;
             }
         }
         if (cardExist) {
@@ -1062,6 +1078,7 @@ public class ProgramController {
         for (SpellCardForUser spellCardForUser : user.allSpells) {
             if (spellCardForUser.getName().equals(cardName)) {
                 cardExist = true;
+                break;
             }
         }
         if (cardExist) {
@@ -1072,6 +1089,7 @@ public class ProgramController {
         for (TrapCardForUser trapCardForUser : user.allTraps) {
             if (trapCardForUser.getName().equals(cardName)) {
                 cardExist = true;
+                break;
             }
         }
         if (cardExist) {
@@ -1082,7 +1100,7 @@ public class ProgramController {
 
         if (!cardExist) {
             System.out.println("card with name " + cardName + " does not exist");
-            return;
+
         }
 
     }
@@ -1094,6 +1112,7 @@ public class ProgramController {
         for (Deck deck : user.allDecks) {
             if (deck.getName().equals(deckName)) {
                 deckExist = true;
+                break;
             }
         }
 
@@ -1105,6 +1124,11 @@ public class ProgramController {
         if (user.getDeckByName(deckName).numberOfCardsInSide < 15) {
 
             for (MonsterForUser monsterForUser1 : user.getDeckByName(deckName).allMonsterForUserSide) {
+                if (monsterForUser1.getName().equals(cardName)) {
+                    check++;
+                }
+            }
+            for (MonsterForUser monsterForUser1 : user.getDeckByName(deckName).allMonsterForUserMain) {
                 if (monsterForUser1.getName().equals(cardName)) {
                     check++;
                 }
@@ -1151,6 +1175,11 @@ public class ProgramController {
                     check++;
                 }
             }
+            for (SpellCardForUser spellCardForUser : user.getDeckByName(deckName).allSpellCardsForUserMain) {
+                if (spellCardForUser.getName().equals(cardName)) {
+                    check++;
+                }
+            }
             if (check < 3) {
                 for (SpellCardForUser spellCardForUser : user.allSpells) {
                     if (spellCardForUser.getName().equals(cardName) && !spellCardForUser.isInDeck) {
@@ -1189,6 +1218,11 @@ public class ProgramController {
         if (user.getDeckByName(deckName).numberOfCardsInSide < 15) {
 
             for (TrapCardForUser trapCardForUser : user.getDeckByName(deckName).allTrapCardsForUserSide) {
+                if (trapCardForUser.getName().equals(cardName)) {
+                    check++;
+                }
+            }
+            for (TrapCardForUser trapCardForUser : user.getDeckByName(deckName).allTrapCardsForUserMain) {
                 if (trapCardForUser.getName().equals(cardName)) {
                     check++;
                 }

@@ -1,6 +1,6 @@
 package sample.model.Card;
 
-public class TrapCardForUser<User, Deck> extends SpellCard{
+public class TrapCardForUser<User, Deck> extends TrapCard{
     public static int numberOfCard=0;
     public int cardNumber;
     public User user;

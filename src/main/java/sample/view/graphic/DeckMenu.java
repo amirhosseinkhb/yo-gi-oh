@@ -47,6 +47,9 @@ public class DeckMenu extends Application {
     public void AddNewDeckClicked(){
 
     }
+    public static void goToDeckShow() throws Exception {
+        new DeckShow().start(stage);
+    }
     public void backToMainMenuClicked() throws Exception {
         new MainMenu().start(stage);
     }

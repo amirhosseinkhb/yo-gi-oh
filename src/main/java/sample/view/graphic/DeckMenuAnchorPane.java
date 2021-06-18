@@ -1,10 +1,13 @@
 package sample.view.graphic;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import sample.controller.UserLogined;
 import sample.model.Deck;
 
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ public class DeckMenuAnchorPane extends AnchorPane {
         Label name = new Label();
         name.setText(deck.getName());
         name.setTranslateX(30);
-        name.setTranslateY(10);
+        name.setTranslateY(0);
         name.setFont(new Font("Cambria", 32));
         name.setTextFill(Color.web("#83d0c9", 0.8));
         this.getChildren().add(name);
@@ -44,6 +47,17 @@ public class DeckMenuAnchorPane extends AnchorPane {
         edit.setId("edit" + deck.getName());
         edit.setPrefWidth(37);
         edit.setPrefHeight(38);
+        edit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                UserLogined.deck=deck;
+                try {
+                    DeckMenu.goToDeckShow();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         this.getChildren().add(edit);
 
         allDecks.add(this);
