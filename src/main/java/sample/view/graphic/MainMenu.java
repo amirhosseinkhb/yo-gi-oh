@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import sample.Game;
 
 public class MainMenu extends Application {
     private static Stage stage;
@@ -37,7 +38,12 @@ public class MainMenu extends Application {
     }
 
     public void DeckClicked() throws Exception {
-        new DeckMenu().start(stage);
+        new DeckShow().start(stage);
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
+
+    public void dueClicked() throws Exception {
+        new DuelMenu().start(stage);
     }
 
     public void ExitClicked() {

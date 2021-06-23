@@ -221,7 +221,7 @@ public class ProgramController {
                 System.out.println("enter numbers of rounds:");
                 String temp = scanner.nextLine();
                 int round = Integer.parseInt(temp);
-                Game(user2Username, user, round);
+                System.out.println(StartGameController.Game(user2Username, user, round));
             }
             pattern = Pattern.compile("duel --new --second-player (^\\s+) --rounds ([\\d])");
             matcher = pattern.matcher(input);
@@ -242,7 +242,7 @@ public class ProgramController {
                     String temp = matcher1.group(1);
                     round=Integer.parseInt(temp);
                 }
-                Game(user2Username, user, round);
+                System.out.println(StartGameController.Game(user2Username, user, round));
             }
 
             System.out.println("Main Menu");
@@ -492,14 +492,14 @@ public class ProgramController {
             if (input.equals("3")) {
                 checker = true;
                 String name = scanner.nextLine();
-                deleteDeck(name, user);
+                System.out.println(DeleteDeck.deleteConsole(name, user));
             }
             pattern = Pattern.compile("deck delete (^\\s+)");
             matcher = pattern.matcher(input);
             if (matcher.find()) {
                 checker = true;
                 String name = matcher.group(1);
-                deleteDeck(name, user);
+                System.out.println(DeleteDeck.deleteConsole(name, user));
             }
 
             if (input.equals("4")) {
@@ -707,55 +707,6 @@ public class ProgramController {
         }
     }
 
-    private static void deleteDeck(String name, User user) {
-        boolean exist = false;
-        for (Deck deck : user.allDecks) {
-            if (deck.getName().equals(name)) {
-                exist = true;
-                break;
-            }}
-            if (exist) {
-
-                for (MonsterForUser monsterForUser : user.getDeckByName(name).allMonsterForUserMain) {
-                    user.allMonsters.add(monsterForUser);
-                    monsterForUser.deck = null;
-                    monsterForUser.isInDeck = false;
-                }
-                for (MonsterForUser monsterForUser : user.getDeckByName(name).allMonsterForUserSide) {
-                    user.allMonsters.add(monsterForUser);
-                    monsterForUser.deck = null;
-                    monsterForUser.isInDeck = false;
-                }
-                for (SpellCardForUser spellCardForUser : user.getDeckByName(name).allSpellCardsForUserMain) {
-                    user.allSpells.add(spellCardForUser);
-                    spellCardForUser.deck = null;
-                    spellCardForUser.isInDeck = false;
-                }
-                for (SpellCardForUser spellCardForUser : user.getDeckByName(name).allSpellCardsForUserSide) {
-                    user.allSpells.add(spellCardForUser);
-                    spellCardForUser.deck = null;
-                    spellCardForUser.isInDeck = false;
-                }
-                for (TrapCardForUser trapCardForUser : user.getDeckByName(name).allTrapCardsForUserMain) {
-                    user.allTraps.add(trapCardForUser);
-                    trapCardForUser.deck = null;
-                    trapCardForUser.isInDeck = false;
-                }
-                for (TrapCardForUser trapCardForUser : user.getDeckByName(name).allTrapCardsForUserSide) {
-                    user.allTraps.add(trapCardForUser);
-                    trapCardForUser.deck = null;
-                    trapCardForUser.isInDeck = false;
-                }
-                if (user.getActiveDeck().getName().equals(name)) {
-                    user.setActiveDeck(null);
-                    user.hasActiveDeck = false;
-                }
-
-                System.out.println("deck deleted successfully");
-            } else {
-                System.out.println("deck with name " + name + " does not exist");
-            }
-        }
 
 
 
@@ -1243,46 +1194,6 @@ public class ProgramController {
             }
         } else {
             System.out.println("side deck is full");
-        }
-    }
-
-    private static void Game(String user2Username, User user, int round) {
-        boolean exist = false;
-        for (User user1 : User.getListOfUsers()) {
-            if (user1.getUsername().equals(user2Username) && !user.getUsername().equals(user2Username)) {
-                exist = true;
-                break;
-            }
-        }
-
-        if (exist) {
-            User user2 = User.getUserByUsername(user2Username);
-            if (user.hasActiveDeck) {
-                if (user2.hasActiveDeck) {
-                    if (user.getActiveDeck().isValid().equals("valid")) {
-                        if (user2.getActiveDeck().isValid().equals("valid")) {
-                            if (round == 1) {
-                                new Game(user, user2);
-                            } else if (round == 3) {
-//@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                //hosh masnoie!!!!!!!!!!!!!!!!!!!
-                            } else {
-                                System.out.println("number of rounds is not supported");
-                            }
-                        } else {
-                            System.out.println(user2.getUsername() + "’s deck is invalid");
-                        }
-                    } else {
-                        System.out.println(user.getUsername() + "’s deck is invalid");
-                    }
-                } else {
-                    System.out.println(user2.getUsername() + " has no active deck");
-                }
-            } else {
-                System.out.println(user.getUsername() + " has no active deck");
-            }
-        } else {
-            System.out.println("there is no player with this username");
         }
     }
 

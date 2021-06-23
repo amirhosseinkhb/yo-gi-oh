@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import sample.controller.DeleteDeck;
 import sample.controller.UserLogined;
 import sample.model.Deck;
 import sample.model.User;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class DeckMenu extends Application {
     private static Stage stage;
     @FXML
-    private AnchorPane innerAnchorPane;
+    public  AnchorPane innerAnchorPane;
     @FXML
     private Text username;
 
@@ -39,17 +40,25 @@ public class DeckMenu extends Application {
     public ArrayList<DeckMenuAnchorPane> creatScorePane(){
         int i=1;
         for (Deck deck: UserLogined.user.allDecks){
+            System.out.println(deck.getName());
             new DeckMenuAnchorPane(i,deck);
         }
         return DeckMenuAnchorPane.getAllDecks();
     }
 
-    public void AddNewDeckClicked(){
+    public  void AddNewDeckClicked() throws Exception {
 
     }
+
+    public static void deleteDeckClicked() throws Exception {
+        new DeckMenu().start(stage);
+    }
+
     public static void goToDeckShow() throws Exception {
         new DeckShow().start(stage);
     }
+
+
     public void backToMainMenuClicked() throws Exception {
         new MainMenu().start(stage);
     }

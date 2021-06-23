@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import sample.controller.DeleteDeck;
+import sample.controller.LoginController;
 import sample.controller.UserLogined;
 import sample.model.Deck;
 
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 
 public class DeckMenuAnchorPane extends AnchorPane {
     private static ArrayList<DeckMenuAnchorPane> allDecks = new ArrayList<>();
+
 
     public DeckMenuAnchorPane(int number, Deck deck) {
 
@@ -38,7 +41,19 @@ public class DeckMenuAnchorPane extends AnchorPane {
         delete.setId("delete" + deck.getName());
         delete.setPrefWidth(50);
         delete.setPrefHeight(38);
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                DeleteDeck.deleteDeck(deck, UserLogined.user);
+                try {
+                    DeckMenu.deleteDeckClicked();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         this.getChildren().add(delete);
+
 
         Button edit = new Button();
         edit.setText("Edit");
