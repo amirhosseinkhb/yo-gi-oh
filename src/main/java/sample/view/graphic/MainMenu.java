@@ -38,7 +38,7 @@ public class MainMenu extends Application {
     }
 
     public void DeckClicked() throws Exception {
-        new DeckShow().start(stage);
+        new DeckMenu().start(stage);
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 

@@ -49,14 +49,14 @@ public class DuelMenu extends Application {
         three.setSelected(false);
     }
 
-    public void StartClicked() {
+    public void StartClicked() throws Exception {
         int rounds = 0;
         if (one.isSelected()) rounds = 1;
         if (three.isSelected()) rounds = 3;
         String nextStep = StartGameController.Game(opponent.getText(), UserLogined.user, rounds);
         error.setText(nextStep);
         if (nextStep.equals("done1")){
-
+            new GameGraphic().start(stage);
         }
     }
 

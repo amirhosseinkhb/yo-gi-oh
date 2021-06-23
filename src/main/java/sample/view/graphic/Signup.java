@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.controller.SignupController;
+import sample.controller.UserLogined;
 import sample.model.User;
 
 

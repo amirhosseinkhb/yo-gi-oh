@@ -40,9 +40,6 @@ public class Start extends Application {
         String nextStep = LoginController.login(usernameVorodi.getText(), passwordVorodi.getText());
         if (nextStep.equals("OK")) {
             UserLogined.user= User.getUserByUsername(usernameVorodi.getText());
-            Deck deck = new Deck(User.getUserByUsername(usernameVorodi.getText()) , "fuck");
-            UserLogined.deck = deck;
-
             new MainMenu().start(stage);
         } else {
             error.setText(nextStep);

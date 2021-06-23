@@ -11,8 +11,8 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.graphic.DuelMenu">
    <children>
-      <Button layoutX="621.0" layoutY="391.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="218.0" text="Start" />
-      <Button layoutX="621.0" layoutY="432.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="218.0" text="Back" />
+      <Button layoutX="621.0" layoutY="391.0" mnemonicParsing="false" onAction="#StartClicked" prefHeight="26.0" prefWidth="218.0" text="Start" />
+      <Button layoutX="621.0" layoutY="432.0" mnemonicParsing="false" onAction="#Back" prefHeight="26.0" prefWidth="218.0" text="Back" />
       <TextField fx:id="opponent" layoutX="730.0" layoutY="312.0" promptText="Opponent username" />
       <Label layoutX="566.0" layoutY="316.0" text="Opponent username" />
       <Text fx:id="error" fill="#f42121" layoutX="566.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="355.73681640625">

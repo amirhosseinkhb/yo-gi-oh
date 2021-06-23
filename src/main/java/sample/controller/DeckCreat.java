@@ -18,7 +18,7 @@ public class DeckCreat {
             new Deck(user, name);
             return "deck created successfully!";
         }else {
-            return "deck with name +" + name + " already exists";
+            return "deck with name " + name + " already exists";
 
         }
     }

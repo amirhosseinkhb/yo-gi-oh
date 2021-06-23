@@ -14,7 +14,7 @@
         </content>
       </ScrollPane>
       <Button layoutY="724.0" mnemonicParsing="false" onAction="#backToMainMenuClicked" text="Back To Main Menu" />
-      <Button layoutX="1405.0" layoutY="1.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="95.0" text="Add New Deck" />
+      <Button layoutX="1405.0" layoutY="1.0" mnemonicParsing="false" onAction="#AddNewDeckClicked" prefHeight="10.0" prefWidth="95.0" text="Add New Deck" />
       <Label layoutX="7.0" layoutY="5.0" text="Username:" textFill="WHITE" />
       <Label layoutX="736.0" layoutY="5.0" text="Deck Menu" textFill="WHITE" />
       <Text fx:id="username" fill="WHITE" layoutX="72.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="470.1367416381836" />
