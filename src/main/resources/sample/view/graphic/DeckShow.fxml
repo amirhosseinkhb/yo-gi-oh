@@ -16,7 +16,7 @@
       </ScrollPane>
       <ScrollPane layoutY="30.0" prefHeight="520.0" prefWidth="1000.0">
         <content>
-          <AnchorPane fx:id="mainDeck" minHeight="0.0" minWidth="0.0" prefHeight="10000.0" prefWidth="1000.0" style="-fx-background-color: #23354a;" />
+          <AnchorPane fx:id="mainDeck" minHeight="0.0" minWidth="0.0" prefHeight="2650.0" prefWidth="1000.0" style="-fx-background-color: #23354a;" />
         </content>
       </ScrollPane>
       <ScrollPane layoutX="1000.0" layoutY="30.0" prefHeight="520.0" prefWidth="500.0">

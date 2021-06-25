@@ -10,18 +10,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MonsterControlerInGame {
-    private static int[] checkIfEmpty = {2, 3, 1, 4, 0};
-    private static Scanner scanner=new Scanner(System.in);
+
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void selectedMonsterFromZone(MonsterForUser monsterForUser, User user, User opponent, String phase) {
-        Scanner scanner=new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String input = "";
         while (!input.equals("select -d")) {
+            System.out.println("tof to in zendegi");
             input = scanner.nextLine();
             boolean checker = false;
-            checker = Game.generalSelected(monsterForUser);
 
-            Pattern pattern = Pattern.compile("set -- position attack");
+            Pattern pattern = Pattern.compile("card show --selected");
             Matcher matcher = pattern.matcher(input);
+            if (matcher.find()) {
+                checker = true;
+                ProgramController.CardShow(monsterForUser.getName());
+            }
+
+             pattern = Pattern.compile("set --position attack");
+             matcher = pattern.matcher(input);
             if (matcher.find()) {
                 checker = true;
                 if (phase.equals("phase1") || phase.equals("phase2")) {
@@ -31,7 +39,7 @@ public class MonsterControlerInGame {
                 }
             }
 //in ke har dast ye bar avaz mishe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            pattern = Pattern.compile("set -- position defense");
+            pattern = Pattern.compile("set --position defense");
             matcher = pattern.matcher(input);
             if (matcher.find()) {
                 checker = true;
@@ -58,8 +66,9 @@ public class MonsterControlerInGame {
             if (matcher.find()) {
                 checker = true;
                 if (phase.equals("battle")) {
+                    System.out.println("khobi?");
                     boolean checkIfOpponentMonsterZoneEmpty = true;
-                    for (int a : checkIfEmpty) {
+                    for (int a=0;a<5;a++) {
                         if (opponent.monsterZone[a] != null) {
                             checkIfOpponentMonsterZoneEmpty = false;
                             break;
@@ -82,6 +91,7 @@ public class MonsterControlerInGame {
             if (matcher.find()) {
                 checker = true;
                 int address = Integer.parseInt(matcher.group(1));
+                address--;
                 if (phase.equals("battle")) {
                     boolean checkIfOpponentMonsterZoneEmpty = true;
                     if (opponent.monsterZone[address] != null) {
@@ -103,21 +113,30 @@ public class MonsterControlerInGame {
 
 
     public static void monsterSelectedFromHand(MonsterForUser monsterForUser, User user, String phase) {
-        Scanner scanner=new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String input = "";
         while (!input.equals("select -d")) {
+            System.out.println("hi1");
             input = scanner.nextLine();
             boolean checker = false;
-            checker = Game.generalSelected(monsterForUser);
-            Pattern pattern = Pattern.compile("summon");
+
+            Pattern pattern = Pattern.compile("card show --selected");
             Matcher matcher = pattern.matcher(input);
             if (matcher.find()) {
+                checker = true;
+                ProgramController.CardShow(monsterForUser.getName());
+            }
+
+            pattern = Pattern.compile("summon");
+            matcher = pattern.matcher(input);
+            if (matcher.find()) {
+                checker = true;
                 if (phase.equals("phase1") || phase.equals("phase2")) {
                     //!!!!!!!!!!!!!!!!!!!!!!has summon???
                     if (Game.hasSummonInThisRound) {
                         System.out.println("you already summoned/set on this turn");
                     } else {
-                        checker = true;
+
                         summonControler(monsterForUser, user);
 
                     }
@@ -129,17 +148,20 @@ public class MonsterControlerInGame {
             pattern = Pattern.compile("set");
             matcher = pattern.matcher(input);
             if (matcher.find()) {
+                checker = true;
                 if (phase.equals("phase1") || phase.equals("phase2")) {
                     if (Game.hasSummonInThisRound) {
                         System.out.println("you already summoned/set on this turn");
                     } else {
-                        checker = true;
                         setController(monsterForUser, user);
                     }
                 } else System.out.println("action not allowed in this phase");
             }
 
 
+            if (!checker) {
+                System.out.println("invalid input");
+            }
         }
     }
 
@@ -156,14 +178,16 @@ public class MonsterControlerInGame {
 
     private static void set(MonsterForUser monsterForUser, User user) {
         boolean hasEmpty = false;
-        for (int a : checkIfEmpty) {
+        for (int a=0;a<5;a++) {
             if (user.monsterZone[a] == null) {
+                System.out.println("hichkaas"+a);
                 hasEmpty = true;
                 monsterForUser.field = Field.valueOf("GAME");
                 monsterForUser.address = a;
                 monsterForUser.position = Position.valueOf("HIDDEN");
                 user.monsterZone[a] = monsterForUser;
                 user.handMonster.remove(monsterForUser);
+                Game.hasSummonInThisRound=true;
                 System.out.println("set successfully");
                 break;
             }
@@ -173,7 +197,7 @@ public class MonsterControlerInGame {
         }
     }
 
-    private static void summonControler(MonsterForUser monsterForUser, User user) {
+    public static void summonControler(MonsterForUser monsterForUser, User user) {
         if (monsterForUser.level <= 4) {
             summon(monsterForUser, user);
 
@@ -186,14 +210,16 @@ public class MonsterControlerInGame {
 
     private static void summon(MonsterForUser monsterForUser, User user) {
         boolean hasEmpty = false;
-        for (int a : checkIfEmpty) {
+        for (int a=0;a<5;a++) {
             if (user.monsterZone[a] == null) {
+                System.out.println("yas"+a);
                 hasEmpty = true;
                 monsterForUser.field = Field.valueOf("GAME");
                 monsterForUser.address = a;
                 monsterForUser.position = Position.valueOf("ATTACK");
                 user.monsterZone[a] = monsterForUser;
                 user.handMonster.remove(monsterForUser);
+                Game.hasSummonInThisRound=true;
                 System.out.println("summoned successfully");
                 break;
             }
@@ -206,7 +232,7 @@ public class MonsterControlerInGame {
     private static boolean tribute(MonsterForUser monsterForUser, User user) {
         if (monsterForUser.level == 5 || monsterForUser.level == 6) {
             boolean hasAnyCard = false;
-            for (int a : checkIfEmpty) {
+            for (int a=0;a<5;a++) {
                 if (user.handMonster != null) {
                     hasAnyCard = true;
 
@@ -217,14 +243,16 @@ public class MonsterControlerInGame {
                 System.out.println("enter an address to tribute");
                 String temp = scanner.nextLine();
                 int address = Integer.parseInt(temp);
+                address--;
                 if (user.monsterZone[address] == null) {
                     System.out.println("there no monsters one this address");
                 } else {
                     user.monsterZone[address].field = Field.valueOf("GRAVE");
                     user.monsterGrave.add(user.monsterZone[address]);
-                    user.NumOfGrave++;
                     user.monsterZone[address].address = user.NumOfGrave;
+                    user.NumOfGrave++;
                     user.monsterZone[address] = null;
+                    System.out.println("done");
                     return true;
                 }
             } else {
@@ -236,7 +264,7 @@ public class MonsterControlerInGame {
 
         if (monsterForUser.level > 6) {
             int checker = 0;
-            for (int a : checkIfEmpty) {
+            for (int a=0;a<5;a++) {
                 if (user.handMonster != null) {
                     checker++;
                 }
@@ -246,25 +274,27 @@ public class MonsterControlerInGame {
                 System.out.println("enter an address to tribute");
                 String temp = scanner.nextLine();
                 int address = Integer.parseInt(temp);
+                address--;
                 if (user.monsterZone[address] == null) {
                     System.out.println("there no monsters one this address");
                 } else {
                     System.out.println("enter an address to tribute");
                     temp = scanner.nextLine();
                     int address1 = Integer.parseInt(temp);
-                    if (user.monsterZone[address] == null) {
+                    address1--;
+                    if (user.monsterZone[address1] == null) {
                         System.out.println("there no monsters one this address");
                     } else {
                         user.monsterZone[address].field = Field.valueOf("GRAVE");
                         user.monsterGrave.add(user.monsterZone[address]);
-                        user.NumOfGrave++;
                         user.monsterZone[address].address = user.NumOfGrave;
+                        user.NumOfGrave++;
                         user.monsterZone[address] = null;
 
                         user.monsterZone[address1].field = Field.valueOf("GRAVE");
                         user.monsterGrave.add(user.monsterZone[address1]);
-                        user.NumOfGrave++;
                         user.monsterZone[address1].address = user.NumOfGrave;
+                        user.NumOfGrave++;
                         user.monsterZone[address1] = null;
 
                         return true;
